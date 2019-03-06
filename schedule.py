@@ -1,5 +1,7 @@
-# for now this code is working 
-# teeling us about ignorable gates
+# this code is working, reading an input qasm file and generating and output qasm
+# file after the removal of ignorable/removale/useless qasm instructions.
+# lot of improvements are required especially good programming practices
+# and cleaning of code
 import re
 
 #############################################
@@ -26,44 +28,20 @@ def ignorable(my_code):
             cancell_i1 = len(my_code2) - 1
             continue
         if(len(subList)==2 and ((q1 == subList[0] and q2 == subList[1]) and consecutive)):
-            # print("cancell")
             cancell_i2 = len(my_code2) - 1
-            # print(len(my_code))
-            # print('i1 ',cancell_i1)
-            # print('i2 ',cancell_i2)
-            # print('val', my_code[cancell_i2])
             my_code[cancell_i1] = '4'
             my_code[cancell_i2] = '4'
-            # print(q1)
-            # print(q2)
-            # print(my_code[cancell_i2])
             consecutive = False
             continue
-        # print(type(subList[0]))
-        # my_code.append = subList
-        # my_code = subList
-        # my_code.append(subList)
         if(len(subList) == 2):
             cancell_i1 = len(my_code2) - 1
             q1 = subList[0]
             q2 = subList[1]
-            # print(q1)
-            # print(type(q1))
-            # print(q2)
-            # print(type(q2))
-            # print(subList[0])
-            # print(subList[1])
-            # print('-----')
-            # print(type(subList[0]))
-            2==2
-        else:
-            2==2
-    # return my_code2
+
 
 #############################################
 # Function defination end
 #############################################
-
 
 
 
@@ -76,7 +54,6 @@ while True:
     
     my_code.append(str1)
 fo.close()
-print(len(my_code))
 ignorable(my_code)
 # my_code4 = ignorable(my_code)
 fo2 = open('code4.txt', 'w')
