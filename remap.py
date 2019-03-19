@@ -1,17 +1,29 @@
 ######################
 # remapping of connectivity graph #
 ######################
+"""
+this code remaps the logical mapping by finding shortest path between two qbits and the
+moving the 2nd qbit
+
+"""
+
+
 import re
 import ast
 
 qbits = [[0,1,2,3,4], [0,0,0,0,0]]
 
+# mapping of hardware topology
 g = {0:[1],
 1:[0,2],
 2:[1,3],
 3:[2,4],
 4:[3]
 }
+
+# hardware topology 
+topology = g
+
 #############################################
 # Function defination begins
 ############################################
@@ -55,7 +67,6 @@ def make_valid(path):
     while i < length:
         g2 = shift_dict_substrings(str(path[i]), str(path[i+1]), "~")
         i+=1
-    # g = g2 is is here, are python dicts immutable? ans: no, some other problem
     return(g2)
 
 
@@ -69,29 +80,20 @@ while True:
         break
     ## regex for extracting digits from a string, returns as char
     subList = re.findall('\d', str1)
+    # checks if 2-qbit op
     if(len(subList) == 2):
+        # checks if valid op based on topology
         if check_valid_op(int(subList[0]), int(subList[1])):
-            # print('valid')
-            2==2
+            pass
+        # if not valid then makes it valid by moving 2nd qbit
         else:
-            # print('invalid')
-            print('before update')
-            print(g)
             path = find_shortest_path(g, int(subList[0]), int(subList[1]))
-            # g = make_valid(g, path) ### issue here check find_shortest_path()
             g = make_valid(path)
-            print('after update')
-            print(g)
-            if check_valid_op(int(subList[0]), int(subList[1])):
-                # 2==2
-                print('valid')
-    else:
-        2==2
 fo.close()
-print("------------------------------------------")
-print("Qubit\t\tdouble bit")
-print("------------------------------------------")
-print(path)
-for i in range(0, 5):
-     2==2
+# print("------------------------------------------")
+# print("Qubit\t\tdouble bit")
+# print("------------------------------------------")
+# print(path)
+# for i in range(0, 5):
+#      2==2
 #     print(str(i) + "\t\t" + str(doubleBit[i]))
