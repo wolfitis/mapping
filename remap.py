@@ -61,6 +61,7 @@ def find_shortest_path(graph, start, end, path=[]):
         return shortest
 
 def make_valid(path):
+    g2 = g
     length = len(path) - 2
     i = 0
     # while not check_valid_op:
@@ -84,11 +85,14 @@ while True:
     if(len(subList) == 2):
         # checks if valid op based on topology
         if check_valid_op(int(subList[0]), int(subList[1])):
+            # print("valid")
             pass
         # if not valid then makes it valid by moving 2nd qbit
         else:
+            # print("invalid")
             path = find_shortest_path(g, int(subList[0]), int(subList[1]))
             g = make_valid(path)
+            # print(path)
 fo.close()
 # print("------------------------------------------")
 # print("Qubit\t\tdouble bit")
