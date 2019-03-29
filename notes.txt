@@ -1,2 +1,4 @@
 v1.0.x represnets the version with single qubit movement in remap 	remap.py
 v1.1.x represnets the version with both qubit movement in remap		remap2.py
+
+v1.x.2.1 topolgy input from file 					both files
