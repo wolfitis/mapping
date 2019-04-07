@@ -5,6 +5,7 @@
 this code remaps the logical mapping by finding shortest path between two qbits and the
 moving the 2nd qbit
 
+v1.0.3 execution stats
 """
 
 
@@ -79,6 +80,10 @@ def make_valid(path):
 #############################################
 # Function defination end
 ############################################
+swaps = [] # to count the swaps of individual instructions
+timetaken = [] # to count the time of individual instructions
+swap_count = 0
+total_time = 0
 fo = open('code1.txt')
 while True:
     str1 = fo.readline()
@@ -90,19 +95,26 @@ while True:
     if(len(subList) == 2):
         # checks if valid op based on topology
         if check_valid_op(int(subList[0]), int(subList[1])):
-            # print("valid")
-            pass
+            swaps.append(0)
+            timetaken.append(2)
+            total_time+=2
+            # pass
         # if not valid then makes it valid by moving 2nd qbit
         else:
             # print("invalid")
             path = find_shortest_path(g, int(subList[0]), int(subList[1]))
             g = make_valid(path)
+            swap_count = len(path) - 2
+            swaps.append(swap_count)
+            timetaken.append(2 + (swap_count * 6))
+            total_time+=2 + (swap_count * 6)
             # print(path)
+    else:
+        swaps.append(0)
+        timetaken.append(1)
+        total_time+=1
 fo.close()
-# print("------------------------------------------")
-# print("Qubit\t\tdouble bit")
-# print("------------------------------------------")
-# print(path)
-# for i in range(0, 5):
-#      2==2
-#     print(str(i) + "\t\t" + str(doubleBit[i]))
+print(swaps)
+print(swap_count)
+print(timetaken)
+print(total_time)
