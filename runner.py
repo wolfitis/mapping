@@ -37,9 +37,9 @@ def check_valid_op(bit1, bit2):
             return True
     return False
 
-# def shift_dict_substrings(s1, s2, temp):
-#     ret_str = str(g).replace(s1, temp).replace(s2, s1).replace(temp, s2)
-#     return dict(ast.literal_eval(ret_str))
+def shift_dict_substrings(s1, s2, temp):
+    ret_str = str(g).replace(s1, temp).replace(s2, s1).replace(temp, s2)
+    return dict(ast.literal_eval(ret_str))
 
 def find_shortest_path(graph, start, end, path=[]):
         path = path + [start]
@@ -56,15 +56,15 @@ def find_shortest_path(graph, start, end, path=[]):
                         shortest = newpath
         return shortest
 
-# def make_valid(path):
-#     g2 = g
-#     length = len(path) - 2
-#     i = 0
-#     # while not check_valid_op:
-#     while i < length:
-#         g2 = shift_dict_substrings(str(path[i]), str(path[i+1]), "~")
-#         i+=1
-#     return(g2)
+def make_valid(path):
+    g2 = g
+    length = len(path) - 2
+    i = 0
+    # while not check_valid_op:
+    while i < length:
+        g2 = shift_dict_substrings(str(path[i]), str(path[i+1]), "~")
+        i+=1
+    return(g2)
 
 
 # Function defination end ################################
@@ -80,14 +80,15 @@ while True:
     subList = re.findall('\d', str1)
     if(len(subList) == 2):
         if check_valid_op(int(subList[0]), int(subList[1])):
+            swaps.append(0)
             timetaken.append(2)
             total_time+=2
             pass
         else:
             path = find_shortest_path(g, int(subList[0]), int(subList[1]))
-            # g = make_valid(path)
-            # swaps will be equal to paths length 0000000000000000 ?
-            swap_count = len(path)
+            g = make_valid(path)
+            # swaps will be equal to paths length - 2 
+            swap_count = len(path) - 2
             swaps.append(swap_count)
             timetaken.append(2 + (swap_count * 6))
             total_time+=2 + (swap_count * 6)
