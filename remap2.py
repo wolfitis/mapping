@@ -146,7 +146,7 @@ while True:
         timetaken.append(1)
         total_time+=1
 fo.close()
-print(swaps)
-print(swap_count)
-print(timetaken)
-print(total_time)
+print("swaps:", swaps)
+print("swaps count: ", swap_count)
+print("timetaken: ", timetaken)
+print("total time: ", total_time)
